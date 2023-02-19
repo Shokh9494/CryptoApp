@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CryptoAppXamarin.Models.Transactions.TransActionsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+                     Order="Primary"
+                     Priority="0"
+                     Command="{Binding TradeCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshTransactionCommand}">
+            <CollectionView ItemsSource="{Binding TransactionCell}"
+                            SelectionMode="Single"
+                            ItemTemplate="{StaticResource TransactionCell}"
+                            SelectedItem="{Binding SelectedTransaction}"
+                            SelectionChangedCommand="{Binding TransactionSelectedCommand}">
+
+            </CollectionView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:microchart="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+             xmlns:wallet="clr-namespace:CryptoAppXamarin.Models.Wallet" 
+             x:DataType="wallet:WalletViewModel"
+             x:Class="CryptoAppXamarin.Models.Wallet.WalletPage">
+    <ContentPage.Content>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshAssetsCommand}">
+            <ScrollView BackgroundColor="White">
+                <StackLayout Padding="0,20,0,0">
+                    <Label Text="{Binding PortfolioValue,StringFormat='Balance: {0:N2}$'}"
+                           TextColor="{StaticResource PrimaryBlue}"
+                           HorizontalOptions="Center"
+                           FontSize="22">
+                        
+                    </Label>
+                    <microchart:ChartView Chart="{Binding PortfolioView}"
+                                      HeightRequest="200"
+                                      BackgroundColor="White"
+                                      Margin="10,20,10,0"/>
+                    <StackLayout BackgroundColor="White"
+                             VerticalOptions="FillAndExpand">
+                        <Label Text="Top Assets"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource InputText}"
+                           Margin="20,20,0,0"/>
+                        <CollectionView ItemsSource="{Binding Assets}"
+                                    SelectionMode="None"
+                                    HeightRequest="{Binding CoinsHeight}"
+                                    ItemTemplate="{StaticResource AssetCell}"
+                                    VerticalScrollBarVisibility="Never"/>
+
+                        <Label Text="Lates Transactions"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource InputText}"
+                           Margin="20,20,0,0"/>
+
+                        <CollectionView ItemsSource="{Binding LatestTransactions}"
+                                    SelectionMode="None"
+                                    HeightRequest="{Binding TransactionHeight}"
+                                    ItemTemplate="{StaticResource TransactionCell}"
+                                    VerticalScrollBarVisibility="Never">
+                            <CollectionView.EmptyView>
+                                <StackLayout>
+                                    <Image Source="emptyview.png"
+                                       HeightRequest="260"
+                                       WidthRequest="260"
+                                       Aspect="AspectFit"
+                                       Margin="20"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"/>
+                                    <Button Text="No Transaction....create one new"
+                                        Style="{StaticResource NoBackgroundSmallButton}"
+                                        Command="{Binding AddNewTransactionCommand}"
+                                        FontSize="17"
+                                        FontAttributes="Bold"
+                                        Margin="20"/>
+                                </StackLayout>
+                            </CollectionView.EmptyView>
+                        </CollectionView>
+                    </StackLayout>
+
+
+                </StackLayout>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>
