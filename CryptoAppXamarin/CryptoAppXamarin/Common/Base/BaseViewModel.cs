@@ -33,6 +33,7 @@ namespace CryptoAppXamarin.Common.Base
         }
 
         private bool _isBusy;
+
         public bool IsBusy
         {
             get => _isBusy;
@@ -46,6 +47,7 @@ namespace CryptoAppXamarin.Common.Base
         }
 
         private bool _isNotBusy = true;
+
         public bool IsNotBusy
         {
             get => _isNotBusy;

@@ -18,7 +18,7 @@ namespace CryptoAppXamarin.Models.Wallet
 			InitializeComponent ();
 			BindingContext=App.Container.Resolve<WalletViewModel> ();
 		}
-        protected override void OnAppearing()
+        protected override  void OnAppearing()
         {
             base.OnAppearing();
 			(BindingContext as WalletViewModel).InitializeAsync(null);

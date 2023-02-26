@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Autofac;
+using CryptoAppXamarin.Models.AddTransaction;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,12 @@ namespace CryptoAppXamarin.Models.Transactions
 		public TransActionsPage ()
 		{
 			InitializeComponent ();
+			BindingContext = App.Container.Resolve<TransactionViewModel>();
 		}
-	}
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+			await (BindingContext as TransactionViewModel).InitializeAsync(null);
+        }
+    }
 }
